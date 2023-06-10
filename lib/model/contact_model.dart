@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class ContactModel {
   String? id;
   final String name;
@@ -17,7 +15,7 @@ class ContactModel {
   });
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'id': id,
       'name': name,
       'phone': phone,
@@ -28,18 +26,16 @@ class ContactModel {
 
   factory ContactModel.fromMap(Map<String, dynamic> map) {
     return ContactModel(
-      id: map['id'] != null ? map['id'] as String : null,
-      name: map['name'] as String,
-      phone: map['phone'] as String,
-      email: map['email'] as String,
-      address: map['address'] as String,
+      id: map['id'],
+      name: map['name'] ?? '',
+      phone: map['phone'] ?? '',
+      email: map['email'] ?? '',
+      address: map['address'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory ContactModel.fromJson(String source) =>
-      ContactModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  static fromDocumentSnapshot(DocumentSnapshot<Object?> data) {}
+      ContactModel.fromMap(json.decode(source));
 }
