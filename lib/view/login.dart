@@ -49,9 +49,9 @@ class Login extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text('Login Successful'),
+                              title: const Text('Login Success'),
                               content: const Text(
-                                  'You have been successfully login.'),
+                                  'You have successfully logged in.'),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
@@ -76,7 +76,7 @@ class Login extends StatelessWidget {
                             return AlertDialog(
                               title: const Text('Login Failed'),
                               content:
-                                  const Text('An error occurred during login.'),
+                                  const Text('Check your email or password!'),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
