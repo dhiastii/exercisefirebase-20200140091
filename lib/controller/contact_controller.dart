@@ -12,18 +12,20 @@ class ContactController {
 
   Stream<List<DocumentSnapshot>> get stream => streamController.stream;
 
-  Future<void> addContact(ContactModel ctmodel) async {
+  //add contact
+  Future addContact(ContactModel ctmodel) async {
+    //convert ContactModel ke map buat dihandle firestore sebagai json type
     final contact = ctmodel.toMap();
-
+    //add contact ke collection dan get document reference
     final DocumentReference docRef = await contactCollection.add(contact);
-
+    //get document id buat contact yang baru ditambah
     final String docId = docRef.id;
-
+    //create new ContactModel pakai document id
     final ContactModel contactModel = ContactModel(
         id: docId,
         name: ctmodel.name,
-        email: ctmodel.email,
         phone: ctmodel.phone,
+        email: ctmodel.email,
         address: ctmodel.address);
 
     await docRef.update(contactModel.toMap());
@@ -39,29 +41,6 @@ class ContactController {
 
     await contactCollection.doc(ctmodel.id).update(contactModel.toMap());
   }
-
-  // Future<void> updateContact(String docId, ContactModel ctmodel) async {
-  //   final ContactModel contactModel = ContactModel(
-  //     name: ctmodel.name,
-  //     email: ctmodel.email,
-  //     phone: ctmodel.phone,
-  //     address: ctmodel.address,
-  //     id: docId,
-  //   );
-
-  //await contactCollection.doc(ctmodel.id).update(contactModel.toMap());
-
-  //   final DocumentSnapshot documentSnapshot =
-  //       await contactCollection.doc(docId).get();
-  //   if (!documentSnapshot.exists) {
-  //     print('Contact with ID $docId does not exist');
-  //     return;
-  //   }
-  //   final updatedContact = contactModel.toMap();
-  //   await contactCollection.doc(docId).update(updatedContact);
-  //   await getContact();
-  //   print('Updated contact with ID $docId');
-  // }
 
   Future<void> removeContact(String id) async {
     await contactCollection.doc(id).delete();
