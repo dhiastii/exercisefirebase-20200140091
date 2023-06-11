@@ -52,14 +52,14 @@ class Register extends StatelessWidget {
                               email!, password!, name!);
 
                       if (registeredUser != null) {
-                        // Registration successful
+                        // Registration success
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text('Registration Successful'),
+                              title: const Text('Registration Success'),
                               content: const Text(
-                                  'You have been successfully registered.'),
+                                  'You have successfully registered'),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
@@ -84,7 +84,7 @@ class Register extends StatelessWidget {
                             return AlertDialog(
                               title: const Text('Registration Failed'),
                               content: const Text(
-                                  'An error occurred during registration.'),
+                                  'Please check your email or password!'),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
